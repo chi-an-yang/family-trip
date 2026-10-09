@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f7f4">
+<title>台南高雄五日</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+html{padding-top:env(safe-area-inset-top,0px)}
+
+/* Mobile first: one day per screen, fixed bottom day switcher, full-width tappable stops; widens to a centred column on desktop. */
+:root{
+  --bg:#f6f7f4;
+  --paper:#ffffff;
+  --fg:#1d2420;
+  --muted:#5f6a63;
+  --line:#dde2dd;
+  --accent:#0f7c73;
+  --accent-soft:#e3f1ee;
+  --show:#b5325f;
+  --show-soft:#f8e6ee;
+  --display:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --tab-h:60px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141917;--paper:#1c2320;--fg:#e8ece9;--muted:#9aa59e;--line:#2d3733;
+    --accent:#4fc2b4;--accent-soft:#1a3330;--show:#f06a99;--show-soft:#3a1c29;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141917;--paper:#1c2320;--fg:#e8ece9;--muted:#9aa59e;--line:#2d3733;
+  --accent:#4fc2b4;--accent-soft:#1a3330;--show:#f06a99;--show-soft:#3a1c29;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:20px calc(var(--tab-h) + env(safe-area-inset-bottom,0px) + 24px)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.25}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+header.top{display:grid;gap:6px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:500}
+header.top h1{font-size:28px;font-weight:700}
+header.top p{margin:0;color:var(--muted);font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.meta span{font-size:13px;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.meta b{color:var(--fg);font-weight:500}
+
+/* day panels */
+.day{display:none;padding-top:18px}
+.day.on{display:block}
+.dayhead{display:grid;gap:2px;margin-bottom:14px}
+.dayhead .date{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.dayhead .date small{font-family:var(--body);font-size:14px;color:var(--muted);font-weight:400;margin-left:8px}
+.dayhead .route{color:var(--muted);font-size:15px}
+.stay{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin-top:8px;padding:8px 12px;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.stay::before{content:"住";flex:0 0 auto;font-size:11px;color:var(--accent);border:1px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.6}
+.day.show .dayhead .date{color:var(--show)}
+
+.stops{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.stop{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.stop .slot{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:500}
+.day.show .stop.showstop{border-color:var(--show);background:var(--show-soft)}
+.day.show .stop.showstop .slot{color:var(--show)}
+.stop .place{font-size:17px;font-weight:500;line-height:1.4}
+.stop .note{color:var(--muted);font-size:14px}
+.stop .maps{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.stop .maps a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);text-decoration:none;font-size:14px;font-weight:500}
+.stop .maps a::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.day.show .stop.showstop .maps a{background:var(--paper);color:var(--show)}
+
+.tip{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:14px;line-height:1.6}
+.tip.show{background:var(--show-soft)}
+.tip strong{font-weight:700}
+
+/* decisions + overview */
+details{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 14px}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:52px;font-family:var(--display);font-size:17px;font-weight:700}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--body);font-size:22px;color:var(--muted);font-weight:400}
+details[open] summary::after{content:"–"}
+details .in{padding-bottom:14px}
+.decide{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:d}
+.decide li{position:relative;padding-left:30px;font-size:14px;line-height:1.6;min-width:0}
+.decide li::before{counter-increment:d;content:counter(d);position:absolute;left:0;top:0;font-family:var(--display);font-weight:700;color:var(--accent);font-size:18px;line-height:1.2}
+.decide b{font-weight:700}
+.areas{display:grid;gap:10px}
+.area{min-width:0}
+.area .tag{display:block;font-size:12px;color:var(--muted);letter-spacing:.08em}
+.area h3{font-size:15px;font-weight:700}
+.area ul{margin:2px 0 0;padding-left:18px;font-size:14px;line-height:1.7}
+footer{margin-top:20px;font-size:12px;color:var(--muted)}
+
+/* bottom day switcher */
+nav.days{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--paper);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+nav.days .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+nav.days button{display:grid;justify-items:center;gap:0;min-height:48px;border-radius:10px;padding:4px 0;color:var(--muted)}
+nav.days button .d{font-family:var(--display);font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+nav.days button .w{font-size:11px;line-height:1.3}
+nav.days button[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+nav.days button.showtab[aria-selected="true"]{background:var(--show-soft);color:var(--show)}
+nav.days button.showtab .d::after{content:" ★";font-size:11px}
+
+@media (min-width:640px){
+  .wrap{padding-inline:24px;padding-block:40px calc(var(--tab-h) + 40px)}
+  header.top h1{font-size:34px}
+  .areas{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:no-preference){.day.on{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="top">
+  <span class="eyebrow">2027 · 4/29 – 5/3</span>
+  <h1>台南高雄五日</h1>
+  <p>Bruno Mars「The Romantic Tour」高雄場之旅，四人同行，步調悠閒。</p>
+  <div class="meta">
+    <span>爸、媽、妹、我</span>
+    <span>演唱會 <b>5/2 18:45 高雄國家體育場</b>（媽、妹、我）</span>
+    <span>自駕<b>（待確認）</b></span>
+  </div>
+</header>
+
+<section class="day on" id="d1" aria-labelledby="t1">
+  <div class="dayhead">
+    <div class="date" id="t1">4/29<small>星期四</small></div>
+    <div class="route">出發 → 台南｜仁德區</div>
+    <div class="stay">台南大員皇冠假日酒店（安平）4/29–5/1</div>
+  </div>
+  <ol class="stops">
+    <li class="stop"><span class="slot">下午</span><div class="place">抵達台南</div><div class="note">仁德在國道與高鐵台南站這一側，進城順路先走。</div></li>
+    <li class="stop"><span class="slot">下午</span><div class="place">奇美博物館</div><div class="note">預留 2 小時，閉館時間出發前再確認。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=奇美博物館" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">下午</span><div class="place">台南都會公園 · 阿波羅噴泉廣場</div><div class="note">兩處相鄰（文華路二段），散步 30 分鐘就好。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南都會公園" target="_blank" rel="noopener">都會公園</a><a href="https://www.google.com/maps/search/?api=1&query=阿波羅噴泉廣場+仁德" target="_blank" rel="noopener">噴泉廣場</a></div></li>
+    <li class="stop"><span class="slot">傍晚</span><div class="place">入住大員皇冠假日酒店</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南大員皇冠假日酒店" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">晚上</span><div class="place">安平晚餐、安平老街散步</div></li>
+  </ol>
+</section>
+
+<section class="day" id="d2" aria-labelledby="t2">
+  <div class="dayhead">
+    <div class="date" id="t2">4/30<small>星期五</small></div>
+    <div class="route">台南｜安平、四草 → 市中心</div>
+  </div>
+  <ol class="stops">
+    <li class="stop"><span class="slot">上午</span><div class="place">四草綠色隧道</div><div class="note">08:00 開放，早去人少不曬。大眾路 360 號，大眾廟旁有免費大型停車場。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道+大眾廟" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">上午</span><div class="place">安平古堡</div><div class="note">離飯店近，逛完回安平吃午餐。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">下午</span><div class="place">孔廟 → 台南市美術館</div><div class="note">美術館在南門路 37 號，從孔廟走路可到。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener">孔廟</a><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館+南門路" target="_blank" rel="noopener">美術館</a></div></li>
+    <li class="stop"><span class="slot">下午</span><div class="place">赤崁樓</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=赤崁樓" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">晚上</span><div class="place">市中心晚餐，回安平休息</div></li>
+  </ol>
+</section>
+
+<section class="day" id="d3" aria-labelledby="t3">
+  <div class="dayhead">
+    <div class="date" id="t3">5/1<small>星期六</small></div>
+    <div class="route">台南 → 山區 → 高雄</div>
+    <div class="stay">Kaohsiung Marriott Hotel 5/1–5/3</div>
+  </div>
+  <ol class="stops">
+    <li class="stop"><span class="slot">上午</span><div class="place">退房，往東出發</div><div class="note">市區到玉井約 50 分鐘。</div></li>
+    <li class="stop"><span class="slot">上午</span><div class="place">玉井</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=玉井" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">中午</span><div class="place">梅嶺</div><div class="note">午餐吃梅子雞，步道走下段就好，不勉強。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=梅嶺" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">下午</span><div class="place">曾文水庫</div><div class="note">之後沿台 3 線南下到高雄，約 1.5–2 小時。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">傍晚</span><div class="place">入住 Kaohsiung Marriott</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=Kaohsiung+Marriott+Hotel" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">晚上</span><div class="place">光之穹頂 → 六合夜市 → 愛河搭船</div><div class="note">三處同一帶。愛之船 15:00–22:00 每 30 分一班，全票 150；貢多拉 16:30／18:00 起至 23:00，全票約 200，船伕會唱歌。乘船處在前金區河東路。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">光之穹頂</a><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">六合夜市</a><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">愛河國賓站</a></div></li>
+  </ol>
+  <div class="tip">這天開車合計約 3.5 小時，對悠閒步調來說偏滿。想鬆一點可以砍掉曾文水庫，只去玉井＋梅嶺。</div>
+</section>
+
+<section class="day show" id="d4" aria-labelledby="t4">
+  <div class="dayhead">
+    <div class="date" id="t4">5/2<small>星期日</small></div>
+    <div class="route">高雄｜演唱會日</div>
+  </div>
+  <ol class="stops">
+    <li class="stop"><span class="slot">上午</span><div class="place">睡晚一點，飯店早餐</div></li>
+    <li class="stop"><span class="slot">中午–下午</span><div class="place">夢時代購物中心</div><div class="note">午餐、逛街、高雄之眼摩天輪。11:00–22:00，輕軌夢時代站下車即到。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">15–16 時</span><div class="place">回飯店休息、換裝</div></li>
+    <li class="stop"><span class="slot">16:30</span><div class="place">媽、妹、我出發前往體育場</div><div class="note">爸留在飯店或附近自由活動。飯店走到捷運巨蛋站（R14）約 5 分鐘，搭紅線往北 3 站到世運站（R17），再走約 10 分鐘。提早到避開入場人潮。</div></li>
+    <li class="stop showstop"><span class="slot">18:45 開演</span><div class="place">Bruno Mars · The Romantic Tour</div><div class="note">高雄國家體育場。開場嘉賓 Anderson .Paak as DJ Pee .Wee。爸不參加，三人同行。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener">地圖</a></div></li>
+  </ol>
+  <div class="tip show"><strong>當天不要開車去。</strong>體育場散場人潮很多，搭捷運最省事：世運站回巨蛋站只有 3 站，散場可先在附近吃點東西等人潮退了再走。</div>
+</section>
+
+<section class="day" id="d5" aria-labelledby="t5">
+  <div class="dayhead">
+    <div class="date" id="t5">5/3<small>星期一</small></div>
+    <div class="route">高雄 → 回家</div>
+  </div>
+  <ol class="stops">
+    <li class="stop"><span class="slot">上午</span><div class="place">退房、早午餐</div><div class="note">5/1 晚上若漏掉光之穹頂或愛河，補在這裡。</div></li>
+    <li class="stop"><span class="slot">中午後</span><div class="place">返程</div></li>
+  </ol>
+</section>
+
+<details>
+  <summary>還要決定的事</summary>
+  <div class="in">
+    <ol class="decide">
+      <li><b>交通是關鍵。</b>玉井、梅嶺、曾文水庫這條線大眾運輸只有班次稀少的公車，帶爸媽幾乎不可行。若最後選大眾運輸，建議拿掉 5/1 山區整段，改成台南市區慢慢逛再搭高鐵或台鐵去高雄；或只在台南兩天租車。</li>
+      <li><b>5/1 行車時間</b>偏長，可視家人狀況砍掉曾文水庫。</li>
+      <li><b>演唱會入場時間</b>與座位區待確認，決定幾點從飯店出發。</li>
+      <li><b>爸 5/2 晚上的安排</b>：留飯店、在巨蛋站附近晚餐，或另外安排。</li>
+    </ol>
+  </div>
+</details>
+
+<details>
+  <summary>地點總覽</summary>
+  <div class="in areas">
+    <div class="area"><span class="tag">台南 · 市中心</span><h3>4/30 下午</h3><ul><li>赤崁樓</li><li>孔廟</li><li>台南市美術館</li></ul></div>
+    <div class="area"><span class="tag">台南 · 安平、四草</span><h3>4/30 上午</h3><ul><li>安平古堡</li><li>四草綠色隧道</li></ul></div>
+    <div class="area"><span class="tag">台南 · 仁德</span><h3>4/29 下午</h3><ul><li>奇美博物館</li><li>台南都會公園</li><li>阿波羅噴泉廣場</li></ul></div>
+    <div class="area"><span class="tag">台南 · 山區</span><h3>5/1 白天</h3><ul><li>玉井</li><li>梅嶺</li><li>曾文水庫</li></ul></div>
+    <div class="area"><span class="tag">高雄 · 前金、新興</span><h3>5/1 晚上</h3><ul><li>光之穹頂</li><li>六合夜市</li><li>愛河遊船</li></ul></div>
+    <div class="area"><span class="tag">高雄 · 前鎮、左營</span><h3>5/2</h3><ul><li>夢時代購物中心</li><li>高雄國家體育場</li></ul></div>
+  </div>
+</details>
+
+<footer>草案 · 2026-10-09 更新。</footer>
+</div>
+
+<nav class="days" aria-label="選擇日期">
+  <div class="in" role="tablist">
+    <button role="tab" data-day="d1" aria-selected="true"><span class="d">4/29</span><span class="w">四</span></button>
+    <button role="tab" data-day="d2" aria-selected="false"><span class="d">4/30</span><span class="w">五</span></button>
+    <button role="tab" data-day="d3" aria-selected="false"><span class="d">5/1</span><span class="w">六</span></button>
+    <button role="tab" data-day="d4" aria-selected="false" class="showtab"><span class="d">5/2</span><span class="w">日</span></button>
+    <button role="tab" data-day="d5" aria-selected="false"><span class="d">5/3</span><span class="w">一</span></button>
+  </div>
+</nav>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('nav.days button');
+  var days=document.querySelectorAll('section.day');
+  function show(id,push){
+    days.forEach(function(s){s.classList.toggle('on',s.id===id);});
+    tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.day===id?'true':'false');});
+    if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
+    window.scrollTo({top:0});
+    try{localStorage.setItem('trip2027-day',id);}catch(e){}
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.day,true);});});
+  var start=null;
+  var h=(location.hash||'').replace('#','');
+  if(/^d[1-5]$/.test(h))start=h;
+  if(!start){try{var s=localStorage.getItem('trip2027-day');if(/^d[1-5]$/.test(s))start=s;}catch(e){}}
+  if(start&&start!=='d1')show(start,false);
+})();
+</script>
+
+</body>
+</html>
