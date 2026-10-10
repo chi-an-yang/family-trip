@@ -42,7 +42,6 @@ a{color:var(--accent)}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-/* header */
 header.top{display:grid;gap:6px;padding-bottom:16px;border-bottom:1px solid var(--line)}
 .eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:500}
 header.top h1{font-size:28px;font-weight:700}
@@ -51,7 +50,6 @@ header.top p{margin:0;color:var(--muted);font-size:14px}
 .meta span{font-size:13px;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
 .meta b{color:var(--fg);font-weight:500}
 
-/* day panels */
 .day{display:none;padding-top:18px}
 .day.on{display:block}
 .dayhead{display:grid;gap:2px;margin-bottom:14px}
@@ -64,11 +62,14 @@ header.top p{margin:0;color:var(--muted);font-size:14px}
 
 .stops{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .stop{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px;min-width:0}
-.stop .slot{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:500}
+.stop .slot{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:500;font-variant-numeric:tabular-nums}
 .day.show .stop.showstop{border-color:var(--show);background:var(--show-soft)}
 .day.show .stop.showstop .slot{color:var(--show)}
 .stop .place{font-size:17px;font-weight:500;line-height:1.4}
+.stop .addr{color:var(--muted);font-size:13px}
 .stop .note{color:var(--muted);font-size:14px}
+.stop .drive{font-size:13px;color:var(--accent);margin-top:2px}
+.stop .drive::before{content:"→ ";}
 .stop .maps{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .stop .maps a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);text-decoration:none;font-size:14px;font-weight:500}
 .stop .maps a::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
@@ -78,7 +79,6 @@ header.top p{margin:0;color:var(--muted);font-size:14px}
 .tip.show{background:var(--show-soft)}
 .tip strong{font-weight:700}
 
-/* decisions + overview */
 details{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 14px}
 summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:52px;font-family:var(--display);font-size:17px;font-weight:700}
 summary::-webkit-details-marker{display:none}
@@ -89,14 +89,17 @@ details .in{padding-bottom:14px}
 .decide li{position:relative;padding-left:30px;font-size:14px;line-height:1.6;min-width:0}
 .decide li::before{counter-increment:d;content:counter(d);position:absolute;left:0;top:0;font-family:var(--display);font-weight:700;color:var(--accent);font-size:18px;line-height:1.2}
 .decide b{font-weight:700}
-.areas{display:grid;gap:10px}
-.area{min-width:0}
-.area .tag{display:block;font-size:12px;color:var(--muted);letter-spacing:.08em}
-.area h3{font-size:15px;font-weight:700}
-.area ul{margin:2px 0 0;padding-left:18px;font-size:14px;line-height:1.7}
+.dist{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.dist th,.dist td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.dist th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em}
+.dist td:last-child{white-space:nowrap;color:var(--accent);font-weight:500}
+.dist .grp td{padding-top:14px;font-family:var(--display);font-weight:700;color:var(--fg);border-bottom:0}
+.addrlist{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px}
+.addrlist b{display:block;font-weight:500}
+.addrlist span{color:var(--muted);font-size:13px}
+.src{font-size:12px;color:var(--muted);margin-top:10px}
 footer{margin-top:20px;font-size:12px;color:var(--muted)}
 
-/* bottom day switcher */
 nav.days{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--paper);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
 nav.days .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 nav.days button{display:grid;justify-items:center;gap:0;min-height:48px;border-radius:10px;padding:4px 0;color:var(--muted)}
@@ -109,7 +112,6 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 @media (min-width:640px){
   .wrap{padding-inline:24px;padding-block:40px calc(var(--tab-h) + 40px)}
   header.top h1{font-size:34px}
-  .areas{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:no-preference){.day.on{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
 </style>
@@ -131,48 +133,52 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 <section class="day on" id="d1" aria-labelledby="t1">
   <div class="dayhead">
     <div class="date" id="t1">4/29<small>星期四</small></div>
-    <div class="route">出發 → 台南｜仁德區</div>
-    <div class="stay">台南大員皇冠假日酒店（安平）4/29–5/1</div>
+    <div class="route">出發 → 服務區午餐 → 奇美博物館 → 安平</div>
+    <div class="stay">台南大員皇冠假日酒店（安平區州平路 289 號）4/29–5/1</div>
   </div>
   <ol class="stops">
-    <li class="stop"><span class="slot">07:30</span><div class="place">出發，走北二高（國道 3 號）南下</div><div class="note">中途休息一次。到台南後從關廟交流道下，接台 86 線西行，仁德就在出口旁。</div></li>
-    <li class="stop"><span class="slot">中午</span><div class="place">抵達仁德，午餐</div><div class="note">奇美博物館園區或周邊用餐，吃完直接進館。</div></li>
-    <li class="stop"><span class="slot">下午</span><div class="place">奇美博物館</div><div class="note">預留 2 小時，閉館時間出發前再確認。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=奇美博物館" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">下午</span><div class="place">台南都會公園 · 阿波羅噴泉廣場</div><div class="note">兩處相鄰（文華路二段），散步 30 分鐘就好。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南都會公園" target="_blank" rel="noopener">都會公園</a><a href="https://www.google.com/maps/search/?api=1&query=阿波羅噴泉廣場+仁德" target="_blank" rel="noopener">噴泉廣場</a></div></li>
-    <li class="stop"><span class="slot">傍晚</span><div class="place">入住大員皇冠假日酒店</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南大員皇冠假日酒店" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">晚上</span><div class="place">安平晚餐、安平老街散步</div></li>
+    <li class="stop"><span class="slot">07:30</span><div class="place">出發，走北二高（國道 3 號）南下</div></li>
+    <li class="stop"><span class="slot">約 11:00</span><div class="place">服務區午餐、逛一逛</div><div class="note">想去看全台最大的服務區。若是國道 3 號台南段的東山服務區，離關廟交流道約 30 分鐘，時間剛好；是哪一個服務區請再確認。</div><div class="drive">服務區 → 關廟交流道下 → 台 86 線西行 → 仁德，約 30–40 分</div></li>
+    <li class="stop"><span class="slot">14:00–17:00</span><div class="place">奇美博物館</div><div class="addr">仁德區文華路二段 66 號 · 09:30–17:30，週三休</div><div class="note">停車場在園區內。整個下午都給它，可以看 3 小時。<strong>阿波羅噴泉廣場就是博物館正門前的噴泉，台南都會公園就是博物館所在的園區</strong>（文華路二段 62 號，走路 3 分鐘），停一次車全部走完，不用另外排。</div><div class="drive">奇美 → 大員皇冠：約 15 km，30 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=奇美博物館" target="_blank" rel="noopener">奇美博物館</a><a href="https://www.google.com/maps/search/?api=1&query=台南都會公園" target="_blank" rel="noopener">都會公園</a></div></li>
+    <li class="stop"><span class="slot">約 17:30</span><div class="place">入住大員皇冠假日酒店</div><div class="addr">安平區州平路 289 號 · 入住時間 15:00 起</div><div class="note">晚於 15:00 到不需要另外申請，直接辦理即可。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南大員皇冠假日酒店" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">晚上</span><div class="place">安平晚餐、安平老街散步</div><div class="note">飯店到安平老街走路約 20 分鐘，或開車 5 分鐘。</div></li>
   </ol>
 </section>
 
 <section class="day" id="d2" aria-labelledby="t2">
   <div class="dayhead">
     <div class="date" id="t2">4/30<small>星期五</small></div>
-    <div class="route">台南｜安平、四草 → 市中心</div>
+    <div class="route">台南｜四草、安平 → 市中心</div>
   </div>
   <ol class="stops">
-    <li class="stop"><span class="slot">上午</span><div class="place">四草綠色隧道</div><div class="note">08:00 開放，早去人少不曬。大眾路 360 號，大眾廟旁有免費大型停車場。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道+大眾廟" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">上午</span><div class="place">安平古堡</div><div class="note">離飯店近，逛完回安平吃午餐。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">下午</span><div class="place">孔廟 → 台南市美術館</div><div class="note">美術館在南門路 37 號，從孔廟走路可到。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener">孔廟</a><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館+南門路" target="_blank" rel="noopener">美術館</a></div></li>
-    <li class="stop"><span class="slot">下午</span><div class="place">赤崁樓</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=赤崁樓" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">晚上</span><div class="place">市中心晚餐，回安平休息</div></li>
+    <li class="stop"><span class="slot">08:30</span><div class="place">四草綠色隧道</div><div class="addr">安南區大眾路 360 號 · 08:00–16:00</div><div class="note">早去人少不曬，竹筏約 30 分鐘。大眾廟旁有免費大型停車場。</div><div class="drive">飯店 → 四草：約 5 km，10 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道+大眾廟" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">10:30</span><div class="place">安平古堡</div><div class="addr">安平區國勝路 82 號 · 08:30–17:10</div><div class="drive">四草 → 安平古堡：約 6 km，12 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">12:00</span><div class="place">安平午餐</div></li>
+    <li class="stop"><span class="slot">14:00</span><div class="place">孔廟 → 台南市美術館 1 館</div><div class="addr">孔廟：中西區南門路 2 號 · 08:30–17:00<br>美術館 1 館：南門路 37 號 · 10:00–18:00</div><div class="note">兩處隔一條街，車停一次走路就到。</div><div class="drive">安平 → 孔廟：約 6 km，15–20 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener">孔廟</a><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館1館" target="_blank" rel="noopener">美術館</a></div></li>
+    <li class="stop"><span class="slot">16:30</span><div class="place">赤崁樓</div><div class="addr">中西區民族路二段 212 號 · 08:30–21:00</div><div class="drive">孔廟 → 赤崁樓：走路約 12 分，或開車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=赤崁樓" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">晚上</span><div class="place">市中心晚餐，回安平休息</div><div class="drive">市中心 → 飯店：約 7 km，20 分</div></li>
   </ol>
 </section>
 
 <section class="day" id="d3" aria-labelledby="t3">
   <div class="dayhead">
     <div class="date" id="t3">5/1<small>星期六</small></div>
-    <div class="route">台南 → 山區 → 高雄</div>
-    <div class="stay">高雄日航酒店（前金區，近愛河）5/1–5/3</div>
+    <div class="route">台南 → 梅嶺 → 曾文水庫 → 高雄</div>
+    <div class="stay">高雄日航酒店（前鎮區林森四路 268 號）5/1–5/3</div>
   </div>
   <ol class="stops">
-    <li class="stop"><span class="slot">上午</span><div class="place">退房，往東出發</div><div class="note">市區到玉井約 50 分鐘。</div></li>
-    <li class="stop"><span class="slot">上午</span><div class="place">玉井</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=玉井" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">中午</span><div class="place">梅嶺</div><div class="note">午餐吃梅子雞，步道走下段就好，不勉強。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=梅嶺" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">下午</span><div class="place">曾文水庫</div><div class="note">之後沿台 3 線南下到高雄，約 1.5–2 小時。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">傍晚</span><div class="place">入住高雄日航酒店</div><div class="note">飯店就在愛河旁，晚上的光之穹頂、六合夜市、愛河搭船都走路或一站捷運可到。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">晚上</span><div class="place">光之穹頂 → 六合夜市 → 愛河搭船</div><div class="note">三處同一帶。愛之船 15:00–22:00 每 30 分一班，全票 150；貢多拉 16:30／18:00 起至 23:00，全票約 200，船伕會唱歌。乘船處在前金區河東路。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">光之穹頂</a><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">六合夜市</a><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">愛河國賓站</a></div></li>
+    <li class="stop"><span class="slot">08:00</span><div class="place">退房出發</div><div class="note">往梅嶺一定會經過玉井（台 84 線 → 玉井 → 台 3 線北上 → 楠西 → 梅嶺），不是繞路，所以路過時停不停都可以。</div><div class="drive">飯店 → 玉井：約 50 km，60 分；玉井 → 梅嶺：約 15 km，20 分</div></li>
+    <li class="stop"><span class="slot">09:00–09:30</span><div class="place">玉井（可停可不停）</div><div class="note">停就是看看老街、吃芒果冰；不停就直接上梅嶺，多留時間走步道。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=玉井老街" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">09:45–11:00</span><div class="place">梅嶺步道走一段</div><div class="addr">楠西區梅嶺風景區</div><div class="note">4 月底沒有梅花，走的是山林步道，只走下段，不勉強。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=梅嶺風景區" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">11:00–12:30</span><div class="place">梅嶺午餐：梅子雞</div><div class="note">餐廳之後再選。</div></li>
+    <li class="stop"><span class="slot">13:00–14:00</span><div class="place">曾文水庫</div><div class="addr">楠西區密枝里 70 號 · 08:00–17:00</div><div class="note">就在梅嶺隔壁，不是兩小時。</div><div class="drive">梅嶺 → 曾文水庫：約 12 km，20–25 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">14:00 出發</span><div class="place">往高雄</div><div class="note">台 3 線南下經玉井、內門、旗山，接國道 10 號進高雄。</div><div class="drive">曾文水庫 → 高雄日航：約 95 km，1 小時 50 分–2 小時</div></li>
+    <li class="stop"><span class="slot">約 16:00</span><div class="place">入住高雄日航酒店</div><div class="addr">前鎮區林森四路 268 號</div><div class="note">走路約 6 分鐘到捷運三多商圈站（R8）。車停飯店後，接下來兩天都搭捷運。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">17:15</span><div class="place">愛河搭船</div><div class="addr">愛河國賓站：前金區河東路 176 號對面</div><div class="note">先搭船，天還亮、看得到河景，日落約 18:25 可以搭到夕陽那班。太陽能愛之船 15:00–22:00 每 30 分一班，約 25 分鐘，全票 150；電動船沒有柴油味。貢多拉 16:30／18:00 起至 23:00，全票約 200。</div><div class="drive">飯店 → 愛河：計程車約 10 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">18:30</span><div class="place">光之穹頂</div><div class="addr">捷運美麗島站 B1，中山一路 115 號</div><div class="drive">愛河 → 美麗島站：沿中正路走約 20 分，或計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">19:00</span><div class="place">六合夜市晚餐</div><div class="note">就在美麗島站旁。吃完從美麗島站（R10）搭 2 站回三多商圈站（R8）。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">地圖</a></div></li>
   </ol>
-  <div class="tip">這天開車合計約 3.5 小時，對悠閒步調來說偏滿。想鬆一點可以砍掉曾文水庫，只去玉井＋梅嶺。</div>
+  <div class="tip">這天開車合計約 3 小時（含到梅嶺 1 小時 20 分、到高雄 2 小時），比原先估的少，因為曾文水庫就在梅嶺旁邊。</div>
 </section>
 
 <section class="day show" id="d4" aria-labelledby="t4">
@@ -182,12 +188,12 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
   </div>
   <ol class="stops">
     <li class="stop"><span class="slot">上午</span><div class="place">睡晚一點，飯店早餐</div></li>
-    <li class="stop"><span class="slot">中午–下午</span><div class="place">夢時代購物中心</div><div class="note">午餐、逛街、高雄之眼摩天輪。11:00–22:00，輕軌夢時代站下車即到。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">中午–下午</span><div class="place">夢時代購物中心</div><div class="addr">前鎮區中華五路 789 號 · 11:00–22:00</div><div class="note">午餐、逛街、高雄之眼摩天輪。離飯店很近，計程車 10 分鐘，或輕軌到夢時代站。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">15–16 時</span><div class="place">回飯店休息、換裝</div></li>
-    <li class="stop"><span class="slot">16:30</span><div class="place">媽、妹、我出發前往體育場</div><div class="note">爸留在飯店或附近自由活動。飯店走到捷運中央公園站（R9）約 5 分鐘，搭紅線往北 8 站到世運站（R17）約 15 分鐘，再走約 10 分鐘。提早到避開入場人潮。</div></li>
-    <li class="stop showstop"><span class="slot">18:45 開演</span><div class="place">Bruno Mars · The Romantic Tour</div><div class="note">高雄國家體育場。開場嘉賓 Anderson .Paak as DJ Pee .Wee。爸不參加，三人同行。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">16:30</span><div class="place">媽、妹、我出發前往體育場</div><div class="note">爸留在飯店或附近自由活動。飯店走到三多商圈站（R8）約 6 分鐘，搭紅線往北 9 站到世運站（R17）約 20 分鐘，再走約 10 分鐘。提早到避開入場人潮。</div></li>
+    <li class="stop showstop"><span class="slot">18:45 開演</span><div class="place">Bruno Mars · The Romantic Tour</div><div class="addr">高雄國家體育場，左營區世運大道 100 號</div><div class="note">開場嘉賓 Anderson .Paak as DJ Pee .Wee。爸不參加，三人同行。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener">地圖</a></div></li>
   </ol>
-  <div class="tip show"><strong>當天不要開車去。</strong>體育場散場人潮很多，搭捷運最省事：世運站直達中央公園站，不用轉乘。散場可先在附近吃點東西等人潮退了再走。</div>
+  <div class="tip show"><strong>當天不要開車去。</strong>體育場散場人潮很多，搭捷運最省事：世運站紅線直達三多商圈站，不用轉乘。散場可先在附近吃點東西等人潮退了再走。</div>
 </section>
 
 <section class="day" id="d5" aria-labelledby="t5">
@@ -202,25 +208,69 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 </section>
 
 <details>
-  <summary>還要決定的事</summary>
+  <summary>車程一覽</summary>
   <div class="in">
-    <ol class="decide">
-      <li><b>5/1 行車時間</b>偏長，可視家人狀況砍掉曾文水庫。</li>
-      <li><b>演唱會入場時間</b>與座位區待確認，決定幾點從飯店出發。</li>
-      <li><b>爸 5/2 晚上的安排</b>：留飯店、在愛河或中央公園一帶晚餐，或另外安排。</li>
-    </ol>
+    <table class="dist">
+      <tr><th>路段</th><th>距離</th><th>車程</th></tr>
+      <tr class="grp"><td colspan="3">4/29</td></tr>
+      <tr><td>關廟交流道 → 奇美博物館（台 86 線）</td><td>約 12 km</td><td>15 分</td></tr>
+      <tr><td>奇美博物館 ↔ 台南都會公園／阿波羅噴泉</td><td>200 m</td><td>走路 3 分</td></tr>
+      <tr><td>奇美博物館 → 大員皇冠</td><td>約 15 km</td><td>30 分</td></tr>
+      <tr class="grp"><td colspan="3">4/30</td></tr>
+      <tr><td>大員皇冠 → 四草綠色隧道</td><td>約 5 km</td><td>10 分</td></tr>
+      <tr><td>四草 → 安平古堡</td><td>約 6 km</td><td>12 分</td></tr>
+      <tr><td>大員皇冠 ↔ 安平古堡</td><td>約 1.5 km</td><td>5 分／走路 20 分</td></tr>
+      <tr><td>安平古堡 → 孔廟</td><td>約 6 km</td><td>15–20 分</td></tr>
+      <tr><td>孔廟 ↔ 美術館 1 館</td><td>100 m</td><td>走路 2 分</td></tr>
+      <tr><td>孔廟 → 赤崁樓</td><td>約 1 km</td><td>走路 12 分</td></tr>
+      <tr><td>赤崁樓 → 大員皇冠</td><td>約 7 km</td><td>20 分</td></tr>
+      <tr class="grp"><td colspan="3">5/1</td></tr>
+      <tr><td>大員皇冠 → 玉井</td><td>約 50 km</td><td>60 分</td></tr>
+      <tr><td>玉井 → 梅嶺</td><td>約 15 km</td><td>20 分</td></tr>
+      <tr><td>梅嶺 → 曾文水庫</td><td>約 12 km</td><td>20–25 分</td></tr>
+      <tr><td>曾文水庫 → 高雄日航</td><td>約 95 km</td><td>1 小時 50 分–2 小時</td></tr>
+      <tr><td>高雄日航 → 愛河國賓站</td><td>約 3 km</td><td>計程車 10 分</td></tr>
+      <tr><td>愛河 → 美麗島站／六合夜市</td><td>約 1.5 km</td><td>走路 20 分</td></tr>
+      <tr class="grp"><td colspan="3">5/2</td></tr>
+      <tr><td>高雄日航 → 夢時代</td><td>約 3 km</td><td>計程車 10 分</td></tr>
+      <tr><td>三多商圈站 → 世運站（捷運紅線 9 站）</td><td></td><td>約 20 分</td></tr>
+    </table>
+    <p class="src">距離與時間為一般路況估計，出發前請用導航確認；山區路段與假日市區以導航為準。</p>
   </div>
 </details>
 
 <details>
-  <summary>地點總覽</summary>
-  <div class="in areas">
-    <div class="area"><span class="tag">台南 · 市中心</span><h3>4/30 下午</h3><ul><li>赤崁樓</li><li>孔廟</li><li>台南市美術館</li></ul></div>
-    <div class="area"><span class="tag">台南 · 安平、四草</span><h3>4/30 上午</h3><ul><li>安平古堡</li><li>四草綠色隧道</li></ul></div>
-    <div class="area"><span class="tag">台南 · 仁德</span><h3>4/29 下午</h3><ul><li>奇美博物館</li><li>台南都會公園</li><li>阿波羅噴泉廣場</li></ul></div>
-    <div class="area"><span class="tag">台南 · 山區</span><h3>5/1 白天</h3><ul><li>玉井</li><li>梅嶺</li><li>曾文水庫</li></ul></div>
-    <div class="area"><span class="tag">高雄 · 前金、新興</span><h3>5/1 晚上</h3><ul><li>光之穹頂</li><li>六合夜市</li><li>愛河遊船</li></ul></div>
-    <div class="area"><span class="tag">高雄 · 前鎮、左營</span><h3>5/2</h3><ul><li>夢時代購物中心</li><li>高雄國家體育場</li></ul></div>
+  <summary>地址總表</summary>
+  <div class="in">
+    <ul class="addrlist">
+      <li><b>台南大員皇冠假日酒店</b><span>台南市安平區州平路 289 號 · 06-391-1899</span></li>
+      <li><b>奇美博物館（含阿波羅噴泉廣場）</b><span>台南市仁德區文華路二段 66 號 · 06-266-0808</span></li>
+      <li><b>台南都會公園</b><span>台南市仁德區文華路二段 62 號</span></li>
+      <li><b>四草綠色隧道（大眾廟）</b><span>台南市安南區大眾路 360 號 · 06-284-0959</span></li>
+      <li><b>安平古堡</b><span>台南市安平區國勝路 82 號</span></li>
+      <li><b>孔廟</b><span>台南市中西區南門路 2 號</span></li>
+      <li><b>台南市美術館 1 館</b><span>台南市中西區南門路 37 號</span></li>
+      <li><b>赤崁樓</b><span>台南市中西區民族路二段 212 號</span></li>
+      <li><b>曾文水庫</b><span>台南市楠西區密枝里 70 號 · 06-575-3251</span></li>
+      <li><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></li>
+      <li><b>愛河國賓站（愛之船）</b><span>高雄市前金區河東路 176 號對面</span></li>
+      <li><b>光之穹頂</b><span>高雄市新興區中山一路 115 號（美麗島站 B1）</span></li>
+      <li><b>夢時代購物中心</b><span>高雄市前鎮區中華五路 789 號</span></li>
+      <li><b>高雄國家體育場</b><span>高雄市左營區世運大道 100 號</span></li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>還要決定的事</summary>
+  <div class="in">
+    <ol class="decide">
+      <li><b>4/29 午餐的服務區</b>是哪一個？確認後補車程。</li>
+      <li><b>5/1 玉井</b>停不停。</li>
+      <li><b>梅嶺梅子雞</b>選哪一家。</li>
+      <li><b>演唱會入場時間</b>與座位區待確認。</li>
+      <li><b>爸 5/2 晚上的安排</b>：留飯店、三多商圈一帶晚餐，或另外安排。</li>
+    </ol>
   </div>
 </details>
 
