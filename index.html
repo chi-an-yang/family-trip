@@ -68,8 +68,13 @@ header.top p{margin:0;color:var(--muted);font-size:14px}
 .stop .place{font-size:17px;font-weight:500;line-height:1.4}
 .stop .addr{color:var(--muted);font-size:13px}
 .stop .note{color:var(--muted);font-size:14px}
-.stop .drive{font-size:13px;color:var(--accent);margin-top:2px}
-.stop .drive::before{content:"→ ";}
+.stop .drive{font-size:13px;color:var(--accent);margin-top:2px;display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.mode{display:inline-flex;gap:2px;flex:0 0 auto;margin-top:1px}
+.mode svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dist td:last-child .mode{margin-right:6px;vertical-align:-3px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 16px;font-size:13px;color:var(--muted);margin:8px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .mode{color:var(--accent)}
 .stop .maps{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .stop .maps a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);text-decoration:none;font-size:14px;font-weight:500}
 .stop .maps a::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
@@ -118,6 +123,13 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16h14M4 16v-4l2-5h12l2 5v4M4 16v2h3v-2M17 16v2h3v-2"/><circle cx="7.5" cy="13" r="1"/><circle cx="16.5" cy="13" r="1"/></symbol>
+  <symbol id="i-train" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l1.5-4M15 21l-1.5-4"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></symbol>
+  <symbol id="i-taxi" viewBox="0 0 24 24"><path d="M5 17h14M4 17v-4l2-5h12l2 5v4M4 17v2h3v-2M17 17v2h3v-2M10 8V5h4v3"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="1.6"/><path d="M10 21l2-6 2 2v4M9 13l3-5 3 1 2 3M9 8l-2 4"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 24 24"><path d="M4 16l1-5h14l1 5M6 11V7h12v4M10 7V4h4v3M3 19c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0"/></symbol>
+</svg>
 <div class="wrap">
 <header class="top">
   <span class="eyebrow">2027 · 4/29 – 5/3</span>
@@ -211,6 +223,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 <details>
   <summary>車程一覽</summary>
   <div class="in">
+    <div class="legend"><span><i class="mode"><svg><use href="#i-car"/></svg></i>開車</span><span><i class="mode"><svg><use href="#i-train"/></svg></i>捷運／輕軌</span><span><i class="mode"><svg><use href="#i-taxi"/></svg></i>計程車</span><span><i class="mode"><svg><use href="#i-walk"/></svg></i>走路</span><span><i class="mode"><svg><use href="#i-ship"/></svg></i>搭船</span></div>
     <table class="dist">
       <tr><th>路段</th><th>距離</th><th>車程</th></tr>
       <tr class="grp"><td colspan="3">4/29</td></tr>
@@ -294,6 +307,29 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 </nav>
 
 <script>
+(function(){
+  function modes(t){
+    var m=[];
+    if(/捷運|紅線|輕軌|\d\s*站/.test(t))m.push('train');
+    if(/計程車/.test(t))m.push('taxi');
+    if(/走路|走回|走約|步行/.test(t))m.push('walk');
+    if(/搭船|竹筏/.test(t))m.push('ship');
+    if(!m.length||/開車|km|自行開/.test(t))m.unshift('car');
+    return m;
+  }
+  function icon(list){
+    var i=document.createElement('i');i.className='mode';
+    i.innerHTML=list.map(function(k){return '<svg aria-hidden="true"><use href="#i-'+k+'"/></svg>';}).join('');
+    return i;
+  }
+  document.querySelectorAll('.stop .drive').forEach(function(d){
+    d.insertBefore(icon(modes(d.textContent)),d.firstChild);
+  });
+  document.querySelectorAll('table.dist tr:not(.grp) td:last-child').forEach(function(td){
+    var t=td.textContent.trim(); if(!t)return;
+    td.insertBefore(icon(modes(td.parentNode.textContent)),td.firstChild);
+  });
+})();
 (function(){
   var tabs=document.querySelectorAll('nav.days button');
   var days=document.querySelectorAll('section.day');
