@@ -102,6 +102,17 @@ details .in{padding-bottom:14px}
 .dist th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em}
 .dist td:last-child{white-space:nowrap;color:var(--accent);font-weight:500}
 .dist .grp td{padding-top:14px;font-family:var(--display);font-weight:700;color:var(--fg);border-bottom:0}
+@media (max-width:639px){
+  .dist,.dist tbody{display:block}
+  .dist tr:first-child{display:none}
+  .dist tr{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .dist td{display:block;padding:0;border:0}
+  .dist td:first-child{grid-column:1/-1;line-height:1.45}
+  .dist td:nth-child(2){color:var(--muted);font-size:13px}
+  .dist td:nth-child(2):empty{display:none}
+  .dist td:last-child{font-size:13px}
+  .dist tr.grp{display:block;padding:14px 0 4px;border-bottom:0}
+}
 .addrlist{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px}
 .addrlist b{display:block;font-weight:500}
 .addrlist span{color:var(--muted);font-size:13px}
