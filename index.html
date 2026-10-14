@@ -237,7 +237,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 </section>
 
 <details>
-  <summary>車程一覽</summary>
+  <summary>當日車程</summary>
   <div class="in">
     <div class="legend"><span><i class="mode"><svg><use href="#i-car"/></svg></i>開車</span><span><i class="mode"><svg><use href="#i-train"/></svg></i>捷運／輕軌</span><span><i class="mode"><svg><use href="#i-taxi"/></svg></i>計程車</span><span><i class="mode"><svg><use href="#i-walk"/></svg></i>走路</span><span><i class="mode"><svg><use href="#i-ship"/></svg></i>搭船</span><span><i class="mode"><svg><use href="#i-hotel"/></svg></i>飯店</span></div>
     <table class="dist">
@@ -348,8 +348,15 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 (function(){
   var tabs=document.querySelectorAll('nav.days button');
   var days=document.querySelectorAll('section.day');
+  var dayOf={'4/29':'d1','4/30':'d2','5/1':'d3','5/2':'d4','5/3':'d5'},cur=null;
+  document.querySelectorAll('table.dist tr').forEach(function(tr,i){
+    if(i===0)return;
+    if(tr.classList.contains('grp')){cur=dayOf[tr.textContent.trim()]||null;tr.hidden=true;return;}
+    tr.dataset.day=cur||'';
+  });
   function show(id,push){
     days.forEach(function(s){s.classList.toggle('on',s.id===id);});
+    document.querySelectorAll('table.dist tr[data-day]').forEach(function(tr){tr.hidden=tr.dataset.day!==id;});
     tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.day===id?'true':'false');});
     if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
     window.scrollTo({top:0});
@@ -360,7 +367,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
   var h=(location.hash||'').replace('#','');
   if(/^d[1-5]$/.test(h))start=h;
   if(!start){try{var s=localStorage.getItem('trip2027-day');if(/^d[1-5]$/.test(s))start=s;}catch(e){}}
-  if(start&&start!=='d1')show(start,false);
+  show(start||'d1',false);
 })();
 </script>
 
