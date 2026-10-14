@@ -84,9 +84,12 @@ header.top p{margin:0;color:var(--muted);font-size:14px}
 .stop .maps a::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
 .day.show .stop.showstop .maps a{background:var(--paper);color:var(--show)}
 
-.stop.plan{background:transparent;border:0;border-top:2px solid var(--line);border-radius:0;padding:14px 0 2px;margin-top:6px}
-.stop.plan .slot{color:var(--muted)}
-.stop.plan .place{font-family:var(--display);font-size:16px;color:var(--muted)}
+.stop.plantabs{background:transparent;border:0;border-top:2px solid var(--line);border-radius:0;padding:14px 0 4px;margin-top:6px}
+.stop.plantabs .slot{color:var(--muted)}
+.ptabs{display:grid;gap:6px}
+.ptabs button{text-align:left;min-height:44px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);font-size:14px;line-height:1.4;cursor:pointer}
+.ptabs button[aria-selected="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
+@media (min-width:480px){.ptabs{grid-template-columns:1fr 1fr}}
 .tip{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:14px;line-height:1.6}
 .tip.show{background:var(--show-soft)}
 .tip strong{font-weight:700}
@@ -208,19 +211,18 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     <li class="stop"><span class="slot">13:00–14:00<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg></i></span><div class="place">曾文水庫</div><div class="addr">楠西區密枝里 70 號 · 08:00–17:00</div><div class="note">就在梅嶺隔壁，不是兩小時。</div><div class="drive">梅嶺 → 曾文水庫：約 12 km，20–25 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">14:00 出發<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg></i></span><div class="place">往高雄</div><div class="note">台 3 線南下經玉井、內門、旗山，接國道 10 號進高雄。</div><div class="drive">曾文水庫 → 高雄日航：約 95 km，1 小時 50 分–2 小時</div></li>
     <li class="stop"><span class="slot">約 16:00<i class="mode"><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">入住高雄日航酒店</div><div class="addr">前鎮區林森四路 268 號</div><div class="note">走路約 6 分鐘到捷運三多商圈站（R8）。車停飯店後，接下來兩天都搭捷運。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop plan" aria-hidden="true"><span class="slot">晚上 · 方案 A</span><div class="place">光之穹頂、愛河、六合夜市</div></li>
-    <li class="stop"><span class="slot">17:00<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">飯店出發，搭捷運</div><div class="note">飯店走 6 分鐘到三多商圈站（R8）→ 紅線往北 2 站到美麗島站（R10），車程約 4 分鐘。晚上三個點都在美麗島站周邊，六合夜市離飯店不是走路距離，要搭這 2 站。回程若人多擠不上車，直接搭計程車回飯店，約 10 分鐘。</div></li>
-    <li class="stop"><span class="slot">17:30<i class="mode"><svg aria-hidden="true"><use href="#i-ship"/></svg></i></span><div class="place">愛河搭船</div><div class="addr">愛河愛之船國賓站：前金區河東路 176 號</div><div class="note">美麗島站出來沿中正路往西走約 20 分鐘，或計程車 5 分鐘。先搭船，天還亮、看得到河景，日落約 18:25 可以搭到夕陽那班。太陽能愛之船 15:00–22:00（週六到 22:30）每 30 分一班，約 25 分鐘，全票 150；電動船沒有柴油味。貢多拉 16:30／18:00 起至 23:00，全票約 200。</div><div class="drive">美麗島站 → 愛河國賓站：走路 20 分／計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">18:45<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">光之穹頂</div><div class="addr">捷運美麗島站 B1，中山一路 115 號 · 06:00–24:00</div><div class="drive">愛河 → 美麗島站：沿中正路走回約 20 分，或計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">六合夜市晚餐</div><div class="note">美麗島站 11 號出口走 2 分鐘，16:30 起營業。看看就好，不用待太晚。吃完從美麗島站（R10）搭 2 站回三多商圈站（R8），約 4 分鐘＋走 6 分鐘；擠不上就計程車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop plan" aria-hidden="true"><span class="slot">晚上 · 方案 B</span><div class="place">西子灣夕陽、港邊夜景</div></li>
-    <li class="stop"><span class="slot">16:45<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">飯店出發往西子灣</div><div class="note">計程車約 15 分最省事；捷運要在美麗島站轉橘線到西子灣站（O1），約 25 分。</div></li>
-    <li class="stop"><span class="slot">17:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">打狗英國領事館文化園區</div><div class="addr">鼓山區蓮海路 20 號 · 週六 09:00–19:00 · 07-525-0100</div><div class="note">山上官邸看港景最好，但要爬一段石階；爸媽若不想爬，可只在山下辦公室區和海邊走走。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=打狗英國領事館文化園區" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">18:00–18:40<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">西子灣看夕陽</div><div class="note">5/1 日落約 18:25。領事館下來沿蓮海路走到海堤即是。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=西子灣" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">19:00<i class="mode"><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">大港橋 19:00 旋轉秀</div><div class="note">週五到週日 19:00 有一場（約 3 分鐘）。西子灣搭輕軌哈瑪星站（C14）→ 駁二大義站（C12）約 8 分，或計程車 5 分；若趕不上也沒關係，橋本身夜景就好看。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=大港橋+高雄" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">晚餐：鹽埕／駁二一帶</div><div class="note">餐廳候選另訂。厚得福在中央公園那頭且 20:30 打烊，走這個方案就不順路。</div></li>
-    <li class="stop"><span class="slot">20:30<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">駁二藝術特區 → 高雄流行音樂中心，港邊夜景</div><div class="addr">駁二：鹽埕區大勇路 1 號（週六室內到 20:00，戶外隨時可逛）</div><div class="note">沿海邊步道從駁二走到流行音樂中心、愛河灣，約 1.5 km，一路都是夜景。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=駁二藝術特區" target="_blank" rel="noopener">駁二</a><a href="https://www.google.com/maps/search/?api=1&query=高雄流行音樂中心" target="_blank" rel="noopener">流行音樂中心</a></div></li>
-    <li class="stop"><span class="slot">21:30<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg></i></span><div class="place">回飯店</div><div class="note">計程車約 15 分；或鹽埕埔站（O2）搭橘線到美麗島轉紅線回三多商圈，約 25 分。</div></li>
+    <li class="stop plantabs"><span class="slot">晚上</span><div class="ptabs" role="tablist" aria-label="晚上方案"><button type="button" role="tab" data-plan-pick="A" aria-selected="true">方案 A · 光之穹頂、愛河、六合夜市</button><button type="button" role="tab" data-plan-pick="B" aria-selected="false">方案 B · 西子灣夕陽、港邊夜景</button></div></li>
+    <li class="stop" data-plan="A"><span class="slot">17:00<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">飯店出發，搭捷運</div><div class="note">飯店走 6 分鐘到三多商圈站（R8）→ 紅線往北 2 站到美麗島站（R10），車程約 4 分鐘。晚上三個點都在美麗島站周邊，六合夜市離飯店不是走路距離，要搭這 2 站。回程若人多擠不上車，直接搭計程車回飯店，約 10 分鐘。</div></li>
+    <li class="stop" data-plan="A"><span class="slot">17:30<i class="mode"><svg aria-hidden="true"><use href="#i-ship"/></svg></i></span><div class="place">愛河搭船</div><div class="addr">愛河愛之船國賓站：前金區河東路 176 號</div><div class="note">美麗島站出來沿中正路往西走約 20 分鐘，或計程車 5 分鐘。先搭船，天還亮、看得到河景，日落約 18:25 可以搭到夕陽那班。太陽能愛之船 15:00–22:00（週六到 22:30）每 30 分一班，約 25 分鐘，全票 150；電動船沒有柴油味。貢多拉 16:30／18:00 起至 23:00，全票約 200。</div><div class="drive">美麗島站 → 愛河國賓站：走路 20 分／計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="A"><span class="slot">18:45<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">光之穹頂</div><div class="addr">捷運美麗島站 B1，中山一路 115 號 · 06:00–24:00</div><div class="drive">愛河 → 美麗島站：沿中正路走回約 20 分，或計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="A"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">六合夜市晚餐</div><div class="note">美麗島站 11 號出口走 2 分鐘，16:30 起營業。看看就好，不用待太晚。吃完從美麗島站（R10）搭 2 站回三多商圈站（R8），約 4 分鐘＋走 6 分鐘；擠不上就計程車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="B"><span class="slot">16:45<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">飯店出發往西子灣</div><div class="note">計程車約 15 分最省事；捷運要在美麗島站轉橘線到西子灣站（O1），約 25 分。</div></li>
+    <li class="stop" data-plan="B"><span class="slot">17:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">打狗英國領事館文化園區</div><div class="addr">鼓山區蓮海路 20 號 · 週六 09:00–19:00 · 07-525-0100</div><div class="note">山上官邸看港景最好，但要爬一段石階；爸媽若不想爬，可只在山下辦公室區和海邊走走。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=打狗英國領事館文化園區" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="B"><span class="slot">18:00–18:40<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">西子灣看夕陽</div><div class="note">5/1 日落約 18:25。領事館下來沿蓮海路走到海堤即是。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=西子灣" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="B"><span class="slot">19:00<i class="mode"><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">大港橋 19:00 旋轉秀</div><div class="note">週五到週日 19:00 有一場（約 3 分鐘）。西子灣搭輕軌哈瑪星站（C14）→ 駁二大義站（C12）約 8 分，或計程車 5 分；若趕不上也沒關係，橋本身夜景就好看。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=大港橋+高雄" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop" data-plan="B"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">晚餐：鹽埕／駁二一帶</div><div class="note">餐廳候選另訂。厚得福在中央公園那頭且 20:30 打烊，走這個方案就不順路。</div></li>
+    <li class="stop" data-plan="B"><span class="slot">20:30<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">駁二藝術特區 → 高雄流行音樂中心，港邊夜景</div><div class="addr">駁二：鹽埕區大勇路 1 號（週六室內到 20:00，戶外隨時可逛）</div><div class="note">沿海邊步道從駁二走到流行音樂中心、愛河灣，約 1.5 km，一路都是夜景。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=駁二藝術特區" target="_blank" rel="noopener">駁二</a><a href="https://www.google.com/maps/search/?api=1&query=高雄流行音樂中心" target="_blank" rel="noopener">流行音樂中心</a></div></li>
+    <li class="stop" data-plan="B"><span class="slot">21:30<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg></i></span><div class="place">回飯店</div><div class="note">計程車約 15 分；或鹽埕埔站（O2）搭橘線到美麗島轉紅線回三多商圈，約 25 分。</div></li>
   </ol>
   <div class="tip">這天開車合計約 3 小時（含到梅嶺 1 小時 20 分、到高雄 2 小時），比原先估的少，因為曾文水庫就在梅嶺旁邊。</div>
 </section>
@@ -278,14 +280,14 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
       <tr><td>梅嶺 → 曾文水庫</td><td>約 12 km</td><td>20–25 分</td></tr>
       <tr><td>曾文水庫 → 高雄日航</td><td>約 95 km</td><td>1 小時 50 分–2 小時</td></tr>
       <tr><td>高雄日航 → 三多商圈站（R8）</td><td>約 450 m</td><td>走路 6 分</td></tr>
-      <tr><td>三多商圈站 → 美麗島站（紅線 2 站）</td><td></td><td>約 4 分</td></tr>
-      <tr><td>美麗島站 ↔ 六合夜市</td><td>約 200 m</td><td>走路 2 分</td></tr>
-      <tr><td>美麗島站 ↔ 愛河國賓站</td><td>約 1.5 km</td><td>走路 20 分／計程車 5 分</td></tr>
-      <tr><td>高雄日航 ↔ 愛河國賓站</td><td>約 3 km</td><td>計程車 10 分</td></tr>
-      <tr><td>高雄日航 → 西子灣／英國領事館（方案 B）</td><td>約 5 km</td><td>計程車 15 分／捷運轉橘線 25 分</td></tr>
-      <tr><td>西子灣 → 大港橋／駁二（方案 B）</td><td>約 2.5 km</td><td>輕軌 8 分／計程車 5 分</td></tr>
-      <tr><td>駁二 → 流行音樂中心（方案 B）</td><td>約 1.5 km</td><td>走路 20 分</td></tr>
-      <tr><td>駁二／鹽埕 → 高雄日航（方案 B）</td><td>約 4 km</td><td>計程車 15 分</td></tr>
+      <tr data-plan="A"><td>三多商圈站 → 美麗島站（紅線 2 站）</td><td></td><td>約 4 分</td></tr>
+      <tr data-plan="A"><td>美麗島站 ↔ 六合夜市</td><td>約 200 m</td><td>走路 2 分</td></tr>
+      <tr data-plan="A"><td>美麗島站 ↔ 愛河國賓站</td><td>約 1.5 km</td><td>走路 20 分／計程車 5 分</td></tr>
+      <tr data-plan="A"><td>高雄日航 ↔ 愛河國賓站</td><td>約 3 km</td><td>計程車 10 分</td></tr>
+      <tr data-plan="B"><td>高雄日航 → 西子灣／英國領事館</td><td>約 5 km</td><td>計程車 15 分／捷運轉橘線 25 分</td></tr>
+      <tr data-plan="B"><td>西子灣 → 大港橋／駁二</td><td>約 2.5 km</td><td>輕軌 8 分／計程車 5 分</td></tr>
+      <tr data-plan="B"><td>駁二 → 流行音樂中心</td><td>約 1.5 km</td><td>走路 20 分</td></tr>
+      <tr data-plan="B"><td>駁二／鹽埕 → 高雄日航</td><td>約 4 km</td><td>計程車 15 分</td></tr>
       <tr class="grp"><td colspan="3">5/2</td></tr>
       <tr><td>高雄日航 → 夢時代</td><td>約 3 km</td><td>計程車 10 分</td></tr>
       <tr><td>三多商圈站 → 世運站（捷運紅線 9 站）</td><td></td><td>約 20 分</td></tr>
@@ -318,14 +320,14 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
       <li><a href="https://www.google.com/maps/search/?api=1&query=梅嶺風景區" target="_blank" rel="noopener"><b>梅嶺風景區</b><span>台南市楠西區灣丘里 · 06-575-5830</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener"><b>曾文水庫</b><span>台南市楠西區密枝里 70 號 · 06-575-3251</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener"><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=愛河愛之船 國賓站" target="_blank" rel="noopener"><b>愛河愛之船（國賓站）</b><span>高雄市前金區河東路 176 號 · 07-281-1313</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂 美麗島站" target="_blank" rel="noopener"><b>光之穹頂</b><span>高雄市新興區中山一路 115 號 B1（美麗島站）</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener"><b>六合夜市</b><span>高雄市新興區六合二路</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=打狗英國領事館文化園區" target="_blank" rel="noopener"><b>打狗英國領事館文化園區（方案 B）</b><span>高雄市鼓山區蓮海路 20 號 · 07-525-0100 · 週六 09:00–19:00</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=西子灣" target="_blank" rel="noopener"><b>西子灣（方案 B）</b><span>高雄市鼓山區蓮海路底</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=大港橋+高雄" target="_blank" rel="noopener"><b>大港橋（方案 B）</b><span>高雄市鹽埕區，駁二大義倉庫旁 · 週五至日 19:00 旋轉</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=駁二藝術特區" target="_blank" rel="noopener"><b>駁二藝術特區（方案 B）</b><span>高雄市鹽埕區大勇路 1 號 · 07-521-4899</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=高雄流行音樂中心" target="_blank" rel="noopener"><b>高雄流行音樂中心（方案 B）</b><span>高雄市苓雅區海邊路 11 號</span></a></li>
+      <li data-plan="A"><a href="https://www.google.com/maps/search/?api=1&query=愛河愛之船 國賓站" target="_blank" rel="noopener"><b>愛河愛之船（國賓站）</b><span>高雄市前金區河東路 176 號 · 07-281-1313</span></a></li>
+      <li data-plan="A"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂 美麗島站" target="_blank" rel="noopener"><b>光之穹頂</b><span>高雄市新興區中山一路 115 號 B1（美麗島站）</span></a></li>
+      <li data-plan="A"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener"><b>六合夜市</b><span>高雄市新興區六合二路</span></a></li>
+      <li data-plan="B"><a href="https://www.google.com/maps/search/?api=1&query=打狗英國領事館文化園區" target="_blank" rel="noopener"><b>打狗英國領事館文化園區</b><span>高雄市鼓山區蓮海路 20 號 · 07-525-0100 · 週六 09:00–19:00</span></a></li>
+      <li data-plan="B"><a href="https://www.google.com/maps/search/?api=1&query=西子灣" target="_blank" rel="noopener"><b>西子灣</b><span>高雄市鼓山區蓮海路底</span></a></li>
+      <li data-plan="B"><a href="https://www.google.com/maps/search/?api=1&query=大港橋+高雄" target="_blank" rel="noopener"><b>大港橋</b><span>高雄市鹽埕區，駁二大義倉庫旁 · 週五至日 19:00 旋轉</span></a></li>
+      <li data-plan="B"><a href="https://www.google.com/maps/search/?api=1&query=駁二藝術特區" target="_blank" rel="noopener"><b>駁二藝術特區</b><span>高雄市鹽埕區大勇路 1 號 · 07-521-4899</span></a></li>
+      <li data-plan="B"><a href="https://www.google.com/maps/search/?api=1&query=高雄流行音樂中心" target="_blank" rel="noopener"><b>高雄流行音樂中心</b><span>高雄市苓雅區海邊路 11 號</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=南豐魯肉飯+自強三路" target="_blank" rel="noopener"><b>南豐魯肉飯（晚餐候選）</b><span>高雄市苓雅區自強三路 139 號 · 07-331-2289 · 09:00–23:30</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=自強夜市35年老店陽春麵" target="_blank" rel="noopener"><b>自強夜市 35 年老店陽春麵（晚餐候選）</b><span>高雄市苓雅區自強三路 108 號 · 16:00–23:30</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=阿蓮河粉+自強三路" target="_blank" rel="noopener"><b>阿蓮河粉（晚餐候選）</b><span>高雄市苓雅區自強三路 105 號 · 07-333-7403 · 11:00–24:00，週一休</span></a></li>
@@ -414,11 +416,23 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     var any=false;
     document.querySelectorAll('.decide[data-day]').forEach(function(u){var on=u.dataset.day===id;u.hidden=!on;if(on)any=true;});
     var e=document.querySelector('#decide-box [data-empty]');if(e)e.hidden=any;
+    applyPlan();
     tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.day===id?'true':'false');});
     if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
     window.scrollTo({top:0});
     try{localStorage.setItem('trip2027-day',id);}catch(e){}
   }
+  var plan='A';
+  try{var sp=localStorage.getItem('trip2027-plan');if(sp==='A'||sp==='B')plan=sp;}catch(e){}
+  function applyPlan(){
+    document.querySelectorAll('[data-plan]').forEach(function(el){
+      var cur=el.closest('section.day');
+      if(cur&&!cur.classList.contains('on'))return;
+      el.hidden=el.dataset.plan!==plan;
+    });
+    document.querySelectorAll('[data-plan-pick]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.planPick===plan?'true':'false');});
+  }
+  document.querySelectorAll('[data-plan-pick]').forEach(function(b){b.addEventListener('click',function(){plan=b.dataset.planPick;try{localStorage.setItem('trip2027-plan',plan);}catch(e){}applyPlan();});});
   tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.day,true);});});
   var start=null;
   var h=(location.hash||'').replace('#','');
