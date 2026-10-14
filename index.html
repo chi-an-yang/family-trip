@@ -114,7 +114,9 @@ details .in{padding-bottom:14px}
   .dist tr.grp{display:block;padding:14px 0 4px;border-bottom:0}
 }
 .addrlist{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px}
-.addrlist b{display:block;font-weight:500}
+.addrlist a{display:block;text-decoration:none;color:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.addrlist a:active{background:var(--accent-soft)}
+.addrlist b{display:block;font-weight:500;color:var(--accent)}
 .addrlist span{color:var(--muted);font-size:13px}
 .src{font-size:12px;color:var(--muted);margin-top:10px}
 footer{margin-top:20px;font-size:12px;color:var(--muted)}
@@ -203,9 +205,9 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     <li class="stop"><span class="slot">14:00 出發<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg></i></span><div class="place">往高雄</div><div class="note">台 3 線南下經玉井、內門、旗山，接國道 10 號進高雄。</div><div class="drive">曾文水庫 → 高雄日航：約 95 km，1 小時 50 分–2 小時</div></li>
     <li class="stop"><span class="slot">約 16:00<i class="mode"><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">入住高雄日航酒店</div><div class="addr">前鎮區林森四路 268 號</div><div class="note">走路約 6 分鐘到捷運三多商圈站（R8）。車停飯店後，接下來兩天都搭捷運。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">17:00<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">飯店出發，搭捷運</div><div class="note">飯店走 6 分鐘到三多商圈站（R8）→ 紅線往北 2 站到美麗島站（R10），車程約 4 分鐘。晚上三個點都在美麗島站周邊，六合夜市離飯店不是走路距離，要搭這 2 站。回程若人多擠不上車，直接搭計程車回飯店，約 10 分鐘。</div></li>
-    <li class="stop"><span class="slot">17:30<i class="mode"><svg aria-hidden="true"><use href="#i-ship"/></svg></i></span><div class="place">愛河搭船</div><div class="addr">愛河國賓站：前金區河東路 176 號對面</div><div class="note">美麗島站出來沿中正路往西走約 20 分鐘，或計程車 5 分鐘。先搭船，天還亮、看得到河景，日落約 18:25 可以搭到夕陽那班。太陽能愛之船 15:00–22:00 每 30 分一班，約 25 分鐘，全票 150；電動船沒有柴油味。貢多拉 16:30／18:00 起至 23:00，全票約 200。</div><div class="drive">美麗島站 → 愛河國賓站：走路 20 分／計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">18:45<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">光之穹頂</div><div class="addr">捷運美麗島站 B1，中山一路 115 號</div><div class="drive">愛河 → 美麗島站：沿中正路走回約 20 分，或計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">六合夜市晚餐</div><div class="note">美麗島站 11 號出口走 2 分鐘。看看就好，不用待太晚。吃完從美麗島站（R10）搭 2 站回三多商圈站（R8），約 4 分鐘＋走 6 分鐘；擠不上就計程車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">17:30<i class="mode"><svg aria-hidden="true"><use href="#i-ship"/></svg></i></span><div class="place">愛河搭船</div><div class="addr">愛河愛之船國賓站：前金區河東路 176 號</div><div class="note">美麗島站出來沿中正路往西走約 20 分鐘，或計程車 5 分鐘。先搭船，天還亮、看得到河景，日落約 18:25 可以搭到夕陽那班。太陽能愛之船 15:00–22:00（週六到 22:30）每 30 分一班，約 25 分鐘，全票 150；電動船沒有柴油味。貢多拉 16:30／18:00 起至 23:00，全票約 200。</div><div class="drive">美麗島站 → 愛河國賓站：走路 20 分／計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=愛河國賓站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">18:45<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">光之穹頂</div><div class="addr">捷運美麗島站 B1，中山一路 115 號 · 06:00–24:00</div><div class="drive">愛河 → 美麗島站：沿中正路走回約 20 分，或計程車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂+美麗島站" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">19:15<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">六合夜市晚餐</div><div class="note">美麗島站 11 號出口走 2 分鐘，16:30 起營業。看看就好，不用待太晚。吃完從美麗島站（R10）搭 2 站回三多商圈站（R8），約 4 分鐘＋走 6 分鐘；擠不上就計程車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener">地圖</a></div></li>
   </ol>
   <div class="tip">這天開車合計約 3 小時（含到梅嶺 1 小時 20 分、到高雄 2 小時），比原先估的少，因為曾文水庫就在梅嶺旁邊。</div>
 </section>
@@ -216,11 +218,11 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     <div class="route">高雄｜演唱會日</div>
   </div>
   <ol class="stops">
-    <li class="stop"><span class="slot">上午<i class="mode"><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">一起吃飯店早餐，上午放鬆</div><div class="note">夢時代 11:00 才開門，上午不用趕。</div></li>
-    <li class="stop"><span class="slot">11:00–14:30<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg></i></span><div class="place">夢時代購物中心</div><div class="addr">前鎮區中華五路 789 號 · 11:00–22:00</div><div class="note">午餐、逛街、高雄之眼摩天輪。離飯店約 3 km，計程車 10 分鐘，或輕軌到夢時代站。這天全程不開車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop"><span class="slot">上午<i class="mode"><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">一起吃飯店早餐，上午放鬆</div><div class="note">夢時代週日 10:30 開門，上午不用趕。</div></li>
+    <li class="stop"><span class="slot">10:30–14:30<i class="mode"><svg aria-hidden="true"><use href="#i-taxi"/></svg></i></span><div class="place">夢時代購物中心</div><div class="addr">前鎮區中華五路 789 號 · 週日 10:30–22:30</div><div class="note">午餐、逛街、高雄之眼摩天輪。離飯店約 3 km，計程車 10 分鐘，或輕軌到夢時代站。這天全程不開車。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">15–16 時<i class="mode"><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">回飯店休息、換裝</div></li>
     <li class="stop"><span class="slot">16:30<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">媽、妹、我出發前往體育場</div><div class="note">爸留在飯店或附近自由活動。飯店走到三多商圈站（R8）約 6 分鐘，搭紅線往北 9 站到世運站（R17）約 20 分鐘，再走約 10 分鐘。提早到避開入場人潮。</div></li>
-    <li class="stop showstop"><span class="slot">18:45 開演<i class="mode"><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">Bruno Mars · The Romantic Tour</div><div class="addr">高雄國家體育場，左營區世運大道 100 號</div><div class="note">開場嘉賓 Anderson .Paak as DJ Pee .Wee。爸不參加，三人同行。含開場嘉賓整場約 2.5–3 小時，預估 21:30 前後散場。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener">地圖</a></div></li>
+    <li class="stop showstop"><span class="slot">18:45 開演<i class="mode"><svg aria-hidden="true"><use href="#i-train"/></svg></i></span><div class="place">Bruno Mars · The Romantic Tour</div><div class="addr">高雄國家體育場，左營區世運大道 100 號 · 07-582-9000</div><div class="note">開場嘉賓 Anderson .Paak as DJ Pee .Wee。爸不參加，三人同行。含開場嘉賓整場約 2.5–3 小時，預估 21:30 前後散場。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener">地圖</a></div></li>
   </ol>
   <div class="tip show"><strong>散場策略：</strong>人潮多，捷運只能排隊等。出來先在體育場附近找東西吃、錯開人潮再搭車；進場前先在三多商圈買點乾糧帶著。世運站紅線直達三多商圈站，不用轉乘。爸的晚餐自理，飯店旁三多商圈選擇很多。</div>
 </section>
@@ -277,25 +279,40 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
 </details>
 
 <details>
-  <summary>地址總表</summary>
+  <summary>當日地址</summary>
   <div class="in">
-    <ul class="addrlist">
-      <li><b>南投服務區</b><span>國道 3 號 231.6K，南投市與中寮鄉交界 · 南北向共用</span></li>
-      <li><b>台南大員皇冠假日酒店</b><span>台南市安平區州平路 289 號 · 06-391-1899</span></li>
-      <li><b>奇美博物館（含阿波羅噴泉廣場）</b><span>台南市仁德區文華路二段 66 號 · 06-266-0808</span></li>
-      <li><b>台南都會公園</b><span>台南市仁德區文華路二段 62 號</span></li>
-      <li><b>四草綠色隧道（大眾廟）</b><span>台南市安南區大眾路 360 號 · 06-284-0959</span></li>
-      <li><b>安平古堡</b><span>台南市安平區國勝路 82 號</span></li>
-      <li><b>孔廟</b><span>台南市中西區南門路 2 號</span></li>
-      <li><b>台南市美術館 1 館</b><span>台南市中西區南門路 37 號</span></li>
-      <li><b>赤崁樓</b><span>台南市中西區民族路二段 212 號</span></li>
-      <li><b>曾文水庫</b><span>台南市楠西區密枝里 70 號 · 06-575-3251</span></li>
-      <li><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></li>
-      <li><b>愛河國賓站（愛之船）</b><span>高雄市前金區河東路 176 號對面</span></li>
-      <li><b>光之穹頂</b><span>高雄市新興區中山一路 115 號（美麗島站 B1）</span></li>
-      <li><b>夢時代購物中心</b><span>高雄市前鎮區中華五路 789 號</span></li>
-      <li><b>高雄國家體育場</b><span>高雄市左營區世運大道 100 號</span></li>
+    <ul class="addrlist" data-day="d1">
+      <li><a href="https://www.google.com/maps/search/?api=1&query=南投服務區" target="_blank" rel="noopener"><b>南投服務區</b><span>國道 3 號 231.6K，南投市振興里南鄉路 250 巷 142 弄 6 號 · 049-220-5910</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=奇美博物館" target="_blank" rel="noopener"><b>奇美博物館（阿波羅噴泉廣場在正門前）</b><span>台南市仁德區文華路二段 66 號 · 06-266-0808</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=台南都會公園" target="_blank" rel="noopener"><b>台南都會公園</b><span>台南市仁德區文華路二段 62 號</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=台南大員皇冠假日酒店" target="_blank" rel="noopener"><b>台南大員皇冠假日酒店</b><span>台南市安平區州平路 289 號 · 06-391-1899</span></a></li>
     </ul>
+    <ul class="addrlist" data-day="d2">
+      <li><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道 大眾廟" target="_blank" rel="noopener"><b>四草綠色隧道（大眾廟）</b><span>台南市安南區大眾路 360 號 · 06-284-0959</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener"><b>安平古堡</b><span>台南市安平區國勝路 82 號 · 06-226-7348</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener"><b>孔廟</b><span>台南市中西區南門路 2 號 · 06-221-4647</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館1館" target="_blank" rel="noopener"><b>台南市美術館 1 館</b><span>台南市中西區南門路 37 號 · 06-221-8881</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=赤崁樓" target="_blank" rel="noopener"><b>赤崁樓</b><span>台南市中西區民族路二段 212 號 · 06-220-5647</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=台南大員皇冠假日酒店" target="_blank" rel="noopener"><b>台南大員皇冠假日酒店</b><span>台南市安平區州平路 289 號 · 06-391-1899</span></a></li>
+    </ul>
+    <ul class="addrlist" data-day="d3">
+      <li><a href="https://www.google.com/maps/search/?api=1&query=玉井老街" target="_blank" rel="noopener"><b>玉井老街</b><span>台南市玉井區中正路一帶</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=梅嶺風景區" target="_blank" rel="noopener"><b>梅嶺風景區</b><span>台南市楠西區灣丘里 · 06-575-5830</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=曾文水庫" target="_blank" rel="noopener"><b>曾文水庫</b><span>台南市楠西區密枝里 70 號 · 06-575-3251</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener"><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=愛河愛之船 國賓站" target="_blank" rel="noopener"><b>愛河愛之船（國賓站）</b><span>高雄市前金區河東路 176 號 · 07-281-1313</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=光之穹頂 美麗島站" target="_blank" rel="noopener"><b>光之穹頂</b><span>高雄市新興區中山一路 115 號 B1（美麗島站）</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=六合夜市" target="_blank" rel="noopener"><b>六合夜市</b><span>高雄市新興區六合二路</span></a></li>
+    </ul>
+    <ul class="addrlist" data-day="d4">
+      <li><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener"><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=夢時代購物中心" target="_blank" rel="noopener"><b>夢時代購物中心</b><span>高雄市前鎮區中華五路 789 號 · 07-813-5678</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=高雄國家體育場" target="_blank" rel="noopener"><b>高雄國家體育場</b><span>高雄市左營區世運大道 100 號 · 07-582-9000</span></a></li>
+    </ul>
+    <ul class="addrlist" data-day="d5">
+      <li><a href="https://www.google.com/maps/search/?api=1&query=高雄日航酒店" target="_blank" rel="noopener"><b>高雄日航酒店</b><span>高雄市前鎮區林森四路 268 號 · 07-537-8800</span></a></li>
+    </ul>
+    <p class="src">點一下即開 Google 地圖導航。</p>
   </div>
 </details>
 
@@ -357,6 +374,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
   function show(id,push){
     days.forEach(function(s){s.classList.toggle('on',s.id===id);});
     document.querySelectorAll('table.dist tr[data-day]').forEach(function(tr){tr.hidden=tr.dataset.day!==id;});
+    document.querySelectorAll('.addrlist[data-day]').forEach(function(u){u.hidden=u.dataset.day!==id;});
     tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.day===id?'true':'false');});
     if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
     window.scrollTo({top:0});
