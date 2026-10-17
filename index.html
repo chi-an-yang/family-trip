@@ -104,6 +104,7 @@ details .in{padding-bottom:14px}
 .decide li{position:relative;padding-left:30px;font-size:14px;line-height:1.6;min-width:0}
 .decide li::before{counter-increment:d;content:counter(d);position:absolute;left:0;top:0;font-family:var(--display);font-weight:700;color:var(--accent);font-size:18px;line-height:1.2}
 .decide b{font-weight:700}
+.decide a{color:var(--accent);text-underline-offset:2px}
 .dist{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
 .dist th,.dist td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 .dist th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em}
@@ -190,7 +191,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
   <ol class="stops">
     <li class="stop"><span class="slot">08:30<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg><svg aria-hidden="true"><use href="#i-ship"/></svg></i></span><div class="place">四草綠色隧道</div><div class="addr">安南區大眾路 360 號 · 08:00–16:00</div><div class="note">早去人少不曬，竹筏約 30 分鐘。大眾廟旁有免費大型停車場。</div><div class="drive">飯店 → 四草：約 5 km，10 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道+大眾廟" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">10:30<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg></i></span><div class="place">安平古堡</div><div class="addr">安平區國勝路 82 號 · 08:30–17:10</div><div class="drive">四草 → 安平古堡：約 6 km，12 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener">地圖</a></div></li>
-    <li class="stop"><span class="slot">12:00<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">安平午餐：牛肉湯</div><div class="note">首選阿財牛肉湯（古堡街 5 號，安平古堡旁走路 2 分，12:00 開，常排隊，古堡逛完直接過去排第一輪）。備選文章牛肉湯安平總店（安平路 592 號，11:00 起，週四休、週五有開，排隊約 30 分）。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=阿財牛肉湯+安平" target="_blank" rel="noopener">阿財</a><a href="https://www.google.com/maps/search/?api=1&query=文章牛肉湯+安平總店" target="_blank" rel="noopener">文章</a></div></li>
+    <li class="stop"><span class="slot">12:00<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">安平午餐：牛肉湯</div><div class="note">首選阿財牛肉湯（古堡街 5 號，安平古堡旁走路 2 分，11:30–12:00 開、出發前電話確認，常排隊，古堡逛完直接過去排第一輪；隱藏版五花肉牛肉湯可試）。備選文章牛肉湯安平總店（安平路 592 號，11:00 起，週四休、週五有開，排隊約 30 分）。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=阿財牛肉湯+安平" target="_blank" rel="noopener">阿財</a><a href="https://www.google.com/maps/search/?api=1&query=文章牛肉湯+安平總店" target="_blank" rel="noopener">文章</a></div></li>
     <li class="stop"><span class="slot">14:00<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">孔廟 → 台南市美術館 1 館</div><div class="addr">孔廟：中西區南門路 2 號 · 08:30–17:00<br>美術館 1 館：南門路 37 號 · 10:00–18:00</div><div class="note">兩處隔一條街，車停一次走路就到。</div><div class="drive">安平 → 孔廟：約 6 km，15–20 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener">孔廟</a><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館1館" target="_blank" rel="noopener">美術館</a></div></li>
     <li class="stop"><span class="slot">16:30<i class="mode"><svg aria-hidden="true"><use href="#i-walk"/></svg></i></span><div class="place">赤崁樓</div><div class="addr">中西區民族路二段 212 號 · 08:30–21:00</div><div class="drive">孔廟 → 赤崁樓：走路約 12 分，或開車 5 分</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=赤崁樓" target="_blank" rel="noopener">地圖</a></div></li>
     <li class="stop"><span class="slot">晚上<i class="mode"><svg aria-hidden="true"><use href="#i-car"/></svg><svg aria-hidden="true"><use href="#i-hotel"/></svg></i></span><div class="place">市中心晚餐：牛肉湯，回安平休息</div><div class="note">首選阿村牛肉湯台南公園店（公園路 57 號，11:00–23:30，赤崁樓走路 8 分，投幣機點餐、白飯肉燥免費續）。備選石精臼牛肉湯（民族路二段 246 號，赤崁樓隔壁，17:00 起）。中午吃過牛肉湯想換口味的話再另找。</div><div class="maps"><a href="https://www.google.com/maps/search/?api=1&query=阿村牛肉湯+台南公園店" target="_blank" rel="noopener">阿村</a><a href="https://www.google.com/maps/search/?api=1&query=石精臼牛肉湯" target="_blank" rel="noopener">石精臼</a></div><div class="drive">市中心 → 飯店：約 7 km，20 分</div></li>
@@ -310,7 +311,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     <ul class="addrlist" data-day="d2">
       <li><a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道 大眾廟" target="_blank" rel="noopener"><b>四草綠色隧道（大眾廟）</b><span>台南市安南區大眾路 360 號 · 06-284-0959</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=安平古堡" target="_blank" rel="noopener"><b>安平古堡</b><span>台南市安平區國勝路 82 號 · 06-226-7348</span></a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=阿財牛肉湯+安平" target="_blank" rel="noopener"><b>阿財牛肉湯（午餐首選）</b><span>台南市安平區古堡街 5 號 · 06-226-1252 · 12:00–21:00，週三休</span></a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=阿財牛肉湯+安平" target="_blank" rel="noopener"><b>阿財牛肉湯（午餐首選）</b><span>台南市安平區古堡街 5 號 · 06-226-1252 · 約 11:30/12:00–21:00，週三休（開店時間請電話確認）</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=文章牛肉湯+安平總店" target="_blank" rel="noopener"><b>文章牛肉湯安平總店（午餐備選）</b><span>台南市安平區安平路 592 號 · 06-358-7910 · 週五 11:00–01:30，週四休</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=台南孔廟" target="_blank" rel="noopener"><b>孔廟</b><span>台南市中西區南門路 2 號 · 06-221-4647</span></a></li>
       <li><a href="https://www.google.com/maps/search/?api=1&query=臺南市美術館1館" target="_blank" rel="noopener"><b>台南市美術館 1 館</b><span>台南市中西區南門路 37 號 · 06-221-8881</span></a></li>
@@ -353,7 +354,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
   <summary>當日待決定</summary>
   <div class="in">
     <ol class="decide" data-day="d2">
-      <li><b>午餐牛肉湯</b>：阿財（古堡旁，12:00 開）或文章安平總店（11:00 開）。</li>
+      <li><b>午餐牛肉湯</b>：阿財（古堡旁）或文章安平總店（11:00 開）。阿財開店時間兩個來源不一致：Google 地圖寫 12:00，<a href="https://tiffany0118.tw/acai-beefsoup/" target="_blank" rel="noopener">食記</a>寫 11:30；出發前打 06-226-1252 確認。食記重點：隱藏版「五花肉牛肉湯」是在地人推薦，帶筋帶油脂、湯更甜；不吃肥的點一般牛肉湯；每碗附白飯或肉燥飯；自調洋蔥沾醬很受好評；假日點餐後約等 30 分。</li>
       <li><b>晚餐牛肉湯</b>：阿村公園店（赤崁樓附近，開到 23:30）或石精臼（赤崁樓隔壁，17:00 起）。兩餐都牛肉湯會不會太多，要不要晚餐換別的。</li>
       <li><b>注意</b>：名店多在中午前賣完或下午休息，4/30 週五有開的才列進來；豪牛 16:30 收、友愛 14:00 收、西羅殿 13:00 收，不適合排進行程。</li>
     </ol>
