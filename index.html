@@ -395,7 +395,6 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
       <li><b>演唱會入場時間</b>待確認，依票面或主辦公告；座位 G10 區，入場後看指標找對應閘門。</li>
       <li><b>爸的晚餐</b>自理，飯店旁三多商圈。</li>
     </ol>
-    <p class="src" data-empty hidden>這天沒有待決定的事。</p>
   </div>
 </details>
 
@@ -448,7 +447,7 @@ nav.days button.showtab .d::after{content:" ★";font-size:11px}
     document.querySelectorAll('.addrlist[data-day]').forEach(function(u){u.hidden=u.dataset.day!==id;});
     var any=false;
     document.querySelectorAll('.decide[data-day]').forEach(function(u){var on=u.dataset.day===id;u.hidden=!on;if(on)any=true;});
-    var e=document.querySelector('#decide-box [data-empty]');if(e)e.hidden=any;
+    var box=document.getElementById('decide-box');if(box)box.hidden=!any;
     applyPlan();
     tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.day===id?'true':'false');});
     if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
